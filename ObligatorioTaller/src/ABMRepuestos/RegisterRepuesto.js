@@ -7,43 +7,33 @@ import MySingleButton from '../components/MySingleButton';
 import DatabaseConnection from "../database/database-connection";
 const db = DatabaseConnection.getConnection();
 
-const RegisterUser = ({ navigation }) => {
-  let [userName, setUserName] = useState('');
-  let [apellido, setApellido] = useState('');
-  let [cedula, setCedula] = useState('');
-  let [auto, setAuto] = useState('');
+const RegisterRepuesto = ({ navigation }) => {
+  let [repuestoName, setRepuestoName] = useState('');
+  let [cantidad, setCantidad] = useState('');
+ 
 
-  const registerUser = () => {
-    console.log(userName, apellido, cedula, auto);
-  
-    if(!userName) {
-      alert('Ingrese su nombre de usuario');
+  const registerRepuesto = () => {
+    console.log(repuestoName, cantidad);
+    // validaciones estados
+    if(!repuestoName) {
+      alert('Ingrese nombre del repuesto');
       return;
     }
 
-    if(!apellido) {
-      alert('Ingrese su apellido');
-      return;
-    }
-
-    if(!cedula) {
-      alert('Ingrese su cedula');
-      return;
-    }
-    if(!auto) {
-      alert('Ingrese su matricula');
+    if(!cantidad) {
+      alert('Ingrese cantidad');
       return;
     }
 
     // guardar los datos
     db.transaction(tx => {
       tx.executeSql(
-        `INSERT INTO users (userName, apellido, cedula, auto) VALUES (?, ?, ?, ?)`,
-        [userName,apellido, cedula, auto], (tx, results) => {
+        `INSERT INTO repuesto (repuestoName, cantidad) VALUES (?, ?)`,
+        [repuestoName, cantidad], (tx, results) => {
           console.log('results', results);
           // validar resultado
           if(results.rowsAffected > 0){
-            Alert.alert('Usuario registrado');
+            Alert.alert('Repuesto registrado');
             navigation.navigate('HomeScreen');
           }
         }
@@ -58,25 +48,15 @@ const RegisterUser = ({ navigation }) => {
             <ScrollView>
               <KeyboardAvoidingView style={styles.keyboardView}>
                 <MyInputText
-                  placeholder="Nombre de Usuario"
-                  onChangeText={(text) => setUserName(text)}
-                />
-                 <MyInputText
-                  placeholder="Apellido de Usuario"
-                  onChangeText={(text) => setUserName(text)}
-                />
-                 <MyInputText
-                  placeholder="Cedula"
-                  onChangeText={(text) => setUserName(text)}
-                />
-                 <MyInputText
-                  placeholder="Auto"
-                  onChangeText={(text) => setUserName(text)}
+                  placeholder="Nombre Repuesto"
+                  onchangeText={(text) => setRepuestoName(text)}
                 />
 
-               
-
-                <MySingleButton title="Guardar Usuario" onPress={registerUser}/>
+                <MyInputText
+                  placeholder="Cantidad"
+                  onchangeText={(text) => setCantidad(text)}
+                />
+                <MySingleButton title="Guardar Repuesto" onPress={registerRepuesto}/>
               </KeyboardAvoidingView>
             </ScrollView>
           </View>
@@ -85,7 +65,7 @@ const RegisterUser = ({ navigation }) => {
   )
 }
 
-export default RegisterUser
+export default RegisterRepuesto
 
 const styles = StyleSheet.create({
   container: {

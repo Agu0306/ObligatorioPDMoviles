@@ -1,9 +1,16 @@
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import RootStack from './src/routes/RootStack';
-import { NavigationContainer } from '@react-navigation/native';
+import RootStack from './src/route';
+
 export default function App() {
-  return 
-    <RootStack/>;
+  return (
+    <View>
+          <RootStack/>
+    </View>
+  
+  )
+   
+     
 }
 
 const styles = StyleSheet.create({

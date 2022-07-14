@@ -8,6 +8,8 @@ import HomeScreen from "../screens/HomeScreen";
 import Usuarios from "../screens/Usuarios";
 import Vehiculos from "../screens/Vehiculos";
 import Tratamientos from "../screens/Tratamientos";
+import Insumos from "../screens/Insumos";
+import Repuestos from "../screens/Repuestos";
 
 
 
@@ -27,6 +29,8 @@ const RootStack = () => {
                 <Stack.Screen name="Usuarios" component={Usuarios} />
                 <Stack.Screen name="Vehiculos" component={Vehiculos} />
                 <Stack.Screen name="Tratamientos" component={Tratamientos} />
+                <Stack.Screen name="Insumos" component={Insumos} />
+                <Stack.Screen name="Repuestos" component={Repuestos} />
               </Stack.Navigator>
         </NavigationContainer>
     );

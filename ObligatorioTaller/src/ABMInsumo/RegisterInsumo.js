@@ -7,43 +7,34 @@ import MySingleButton from '../components/MySingleButton';
 import DatabaseConnection from "../database/database-connection";
 const db = DatabaseConnection.getConnection();
 
-const RegisterUser = ({ navigation }) => {
+const RegisterInsumo = ({ navigation }) => {
   let [userName, setUserName] = useState('');
-  let [apellido, setApellido] = useState('');
-  let [cedula, setCedula] = useState('');
-  let [auto, setAuto] = useState('');
-
-  const registerUser = () => {
-    console.log(userName, apellido, cedula, auto);
+  let [cantidad, setCantidad] = useState('');
   
+
+  const registerInsumo = () => {
+    console.log(userName, cantidad);
+    // validaciones estados
     if(!userName) {
-      alert('Ingrese su nombre de usuario');
+      alert('Ingrese su nombre de Insumo');
       return;
     }
 
-    if(!apellido) {
-      alert('Ingrese su apellido');
+    if(!cantidad) {
+      alert('Ingrese cantidad');
       return;
     }
-
-    if(!cedula) {
-      alert('Ingrese su cedula');
-      return;
-    }
-    if(!auto) {
-      alert('Ingrese su matricula');
-      return;
-    }
+}
 
     // guardar los datos
     db.transaction(tx => {
       tx.executeSql(
-        `INSERT INTO users (userName, apellido, cedula, auto) VALUES (?, ?, ?, ?)`,
-        [userName,apellido, cedula, auto], (tx, results) => {
+        `INSERT INTO insumos (userName, cantidad) VALUES (?, ?)`,
+        [userName, cantidad], (tx, results) => {
           console.log('results', results);
           // validar resultado
           if(results.rowsAffected > 0){
-            Alert.alert('Usuario registrado');
+            Alert.alert('Insumo registrado');
             navigation.navigate('HomeScreen');
           }
         }
@@ -58,34 +49,25 @@ const RegisterUser = ({ navigation }) => {
             <ScrollView>
               <KeyboardAvoidingView style={styles.keyboardView}>
                 <MyInputText
-                  placeholder="Nombre de Usuario"
-                  onChangeText={(text) => setUserName(text)}
-                />
-                 <MyInputText
-                  placeholder="Apellido de Usuario"
-                  onChangeText={(text) => setUserName(text)}
-                />
-                 <MyInputText
-                  placeholder="Cedula"
-                  onChangeText={(text) => setUserName(text)}
-                />
-                 <MyInputText
-                  placeholder="Auto"
-                  onChangeText={(text) => setUserName(text)}
+                  placeholder="Nombre insumo"
+                  onchangeText={(text) => setUserName(text)}
                 />
 
-               
+                <MyInputText
+                  placeholder="Cantidad"
+                  onchangeText={(text) => setCantidad(text)}
+                />
 
-                <MySingleButton title="Guardar Usuario" onPress={registerUser}/>
+                <MySingleButton title="Guardar insumo" onPress={registerInsumo}/>
               </KeyboardAvoidingView>
             </ScrollView>
           </View>
         </View>
     </SafeAreaView>
   )
-}
 
-export default RegisterUser
+
+export default RegisterInsumo
 
 const styles = StyleSheet.create({
   container: {

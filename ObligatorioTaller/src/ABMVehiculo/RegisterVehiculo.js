@@ -7,38 +7,43 @@ import MySingleButton from '../components/MySingleButton';
 import DatabaseConnection from "../database/database-connection";
 const db = DatabaseConnection.getConnection();
 
-const RegisterUser = ({ navigation }) => {
-  let [userName, setUserName] = useState('');
-  let [password, setPassword] = useState('');
-  let [email, setEmail] = useState('');
+const RegisterVehiculo = ({ navigation }) => {
+  let [vehiculo, setVehiculo] = useState('');
+  let [marca, setMarca] = useState('');
+  let [color, setColor] = useState('');
+  let [motor, setMotor] = useState('');
 
-  const registerUser = () => {
-    console.log(userName, password, email);
+  const registerVehiculo = () => {
+    console.log(vehiculo, marca, color, motor);
     // validaciones estados
-    if(!userName) {
-      alert('Ingrese su nombre de usuario');
+    if(!vehiculo) {
+      alert('Ingrese matricula');
       return;
     }
 
-    if(!password) {
-      alert('Ingrese su contraseña');
+    if(!marca) {
+      alert('Ingrese marca');
       return;
     }
 
-    if(!email) {
-      alert('Ingrese su email');
+    if(!color) {
+      alert('Ingrese color');
+      return;
+    }
+    if(!motor) {
+      alert('Ingrese serie del motor');
       return;
     }
 
     // guardar los datos
     db.transaction(tx => {
       tx.executeSql(
-        `INSERT INTO users (userName, password, email) VALUES (?, ?, ?)`,
-        [userName, password, email], (tx, results) => {
+        `INSERT INTO vehiculo (vehiculo, marca, color, motor) VALUES (?, ?, ?, ?)`,
+        [vehiculo, marca, color, motor], (tx, results) => {
           console.log('results', results);
           // validar resultado
           if(results.rowsAffected > 0){
-            Alert.alert('Usuario registrado');
+            Alert.alert('Vehiculo registrado');
             navigation.navigate('HomeScreen');
           }
         }
@@ -53,24 +58,24 @@ const RegisterUser = ({ navigation }) => {
             <ScrollView>
               <KeyboardAvoidingView style={styles.keyboardView}>
                 <MyInputText
-                  placeholder="Nombre de Usuario"
-                  onchangeText={(text) => setUserName(text)}
+                  placeholder="Matricula"
+                  onchangeText={(text) => setVehiculo(text)}
                 />
 
                 <MyInputText
-                  placeholder="Contraseña"
-                  minLength={8}
-                  maxLength={16}
-                  onchangeText={(text) => setPassword(text)}
+                  placeholder="Marca"
+                  onchangeText={(text) => setMarca(text)}
                 />
-
-                <MyInputText 
-                  placeholder="Correo Electronico"
-                  keyboardType="email-address"
-                  onchangeText={(text) => setEmail(text)}
+                 <MyInputText
+                  placeholder="Color"
+                  onchangeText={(text) => setColor(text)}
                 />
+                 <MyInputText
+                  placeholder="Motor"
+                  onchangeText={(text) => setMotor(text)}
+                />              
 
-                <MySingleButton title="Guardar Usuario" onPress={registerUser}/>
+                <MySingleButton title="Guardar Vehiculo" onPress={registerVehiculo}/>
               </KeyboardAvoidingView>
             </ScrollView>
           </View>
@@ -79,7 +84,7 @@ const RegisterUser = ({ navigation }) => {
   )
 }
 
-export default RegisterUser
+export default RegisterVehiculo
 
 const styles = StyleSheet.create({
   container: {

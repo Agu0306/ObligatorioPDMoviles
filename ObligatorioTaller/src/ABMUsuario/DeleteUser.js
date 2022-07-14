@@ -7,7 +7,7 @@ import DatabaseConnection from "../database/database-connection";
 const db = DatabaseConnection.getConnection();
 
 const deleteUser = () => {
-  const [userName, setUserName] useState('')
+  const [userName, setUserName]= useState('')
 
   const deleteUser = () => {
     console.log('deleteUser');
@@ -38,7 +38,7 @@ const DeleteUser = () => {
       <MyInputText
       placeholder="Nombre de usuario"
       onChangeText={(text) => setUserName(text)}/>
-      <MySingleButton title="Borrar Usuario" customPress={}/>
+      <MySingleButton title="Borrar Usuario" customPress={deleteUser}/>
      
     </View>
   </View>

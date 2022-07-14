@@ -10,29 +10,46 @@ import { ScrollView } from 'react-native-gesture-handler';
 import MyText from '../components/MyText';
 const db = DatabaseConnection.getConnection();
 
-const UpdateUser = () => {
-  const [user, setUser] = useState({});
+const UpdateTratamiento = () => {
+  const [tratamiento, setTratamiento] = useState({});
 
-  const UpdateUser
+  const UpdateTratamiento
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.viewContainer}>
         <View style={styles.generalView}>
           <ScrollView keyboardShouldPersistTaps="handled"/>
             <KeyboardAvoidingView behavior='padding' style={styles.keyboardView}>
-              <MyText text="Buscar Usuario"/>
+              <MyText text="Buscar Tratamiento"/>
               <MyInputText
-              placeholder="Ingrese el nombre de usuario"
+              placeholder="Ingrese el nombre del tratamiento"
               style={styles.inputStyle}/>
               <MySingleButton title = "Buscar" customPress={} />
 
               <MyInputText 
-              placeholder="Ingrese el nombre de usuario"
+              placeholder="Ingrese el nombre del tratamiento"
               value={user.userName}/>
               <MyInputText 
-              placeholder="Ingrese email"
+              placeholder="Ingrese vehiculo"
               value ={}/>
-              <MyButton title = "Actualizar" customPress={UpdateUser}/>
+               <MyInputText 
+              placeholder="Ingrese fecha de inicio"
+              value ={}/>
+               <MyInputText 
+              placeholder="Ingrese fecha de finalizacion"
+              value ={}/>
+               <MyInputText 
+              placeholder="Ingrese costo"
+              value ={}/>
+               <MyInputText 
+              placeholder="Ingrese insumo"
+              value ={}/>
+               <MyInputText 
+              placeholder="Ingrese repuesto"
+              value ={}/>
+              
+
+              <MyButton title = "Actualizar" customPress={UpdateTratamiento}/>
             </KeyboardAvoidingView>
         </View>
       </View>
@@ -41,7 +58,7 @@ const UpdateUser = () => {
   )
 }
 
-export default UpdateUser
+export default UpdateTratamiento
 
 const styles = StyleSheet.create({
   container: {

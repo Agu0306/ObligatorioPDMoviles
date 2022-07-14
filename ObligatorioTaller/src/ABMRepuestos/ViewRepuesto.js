@@ -5,46 +5,43 @@ import MyText from '../components/MyText'
 import MySingleButton from '../components/MySingleButton'
 
 import DatabaseConnection from "../database/database-connection";
-import Vehiculos from '../screens/Vehiculos'
 const db = DatabaseConnection.getConnection();
 
-const getVehiculoData = () => {
-  console.log('getVehiculoData');
-  setVehiculoData({})
+const getRepuestosData = () => {
+  console.log('getRepuestosData');
+  setRepuestosData({})
   db.transaction (tx=> {
     tx.executeSql(
-      'SELECT * FROM vehiculos WHERE vehiculo = ?',
-      [Vehiculos], [tx, results] => {
+      'SELECT * FROM repuestos WHERE repuestoName = ?',
+      [repuestoName], [tx, results] => {
         console.log('results', results);
       if(results.row.length >0){
-        setVehiculoData(resuts.row.item(0));
+        setRepuestosData(resuts.row.item(0));
       }
       else{
-        Alert.alert('El vehiculo no existe');
+        Alert.alert('El repuesto no existe');
       }
       }
    )
   )
 }
-const ViewVehiculo = () => {
-  const[vehiculo, setVehiculo] = useState('');
-  const[VehiculoData, setVehiculoData] = useState({});
+const ViewRepuesto = () => {
+  const[repuestoName, setRepuestoName] = useState('');
+  const[repuestoData, setRepuestoData] = useState({});
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.viewContainer}>
         <View style={styles.generalView}>
-          <MyText style={styles.inputStyle}>Filtro de vehiculo</MyText>
+          <MyText style={styles.inputStyle}>Filtro de repuesto</MyText>
           <MyInputText style={styles.inputStyle}
-          placeholder="Matricula"
-          onChangeText={(Text) => setVehuiculo(Text)}
+          placeholder="Nomre de repuesto"
+          onChangeText={(Text) => setRepuestoName(Text)}
           />
-          <MySingleButton title="Buscar" customPress={getVehiculoData}/>
+          <MySingleButton title="Buscar" customPress={getRepuestoData}/>
           <View style={styles.presenterView}>
-            <MyText>Matricula: {vehiculoData.vehiculo} </MyText>
-            <MyText>Marca: {vehiculoData}</MyText>
-            <MyText>Color: {vehiculoData}</MyText>
-            <MyText>Motor: {vehiculoData}</MyText>
-            <MyText>Ver Vehiculo</MyText>
+            <MyText>Nombre de Repuesto: {repuestoData.repuestoName} </MyText>
+            <MyText>Cantidad: {repuestoData}</MyText>
+            <MyText>ViewUser</MyText>
           </View>
         </View>
     </View>
@@ -52,7 +49,7 @@ const ViewVehiculo = () => {
   )
 }
 
-export default ViewVehiculo
+export default ViewRepuesto
 
 const styles = StyleSheet.create({
   container:{

@@ -6,22 +6,22 @@ import MySingleButton from '../components/MySingleButton';
 import DatabaseConnection from "../database/database-connection";
 const db = DatabaseConnection.getConnection();
 
-const deleteVehiculo = () => {
-  const [vehiculo, setVehiculo] = useState('')
+const deleteRepuesto = () => {
+  const [repuestoName, setRepuestoName] = useState('')
 
-  const deleteVehiculo = () => {
-    console.log('deleteVehiculo');
+  const deleteRepuesto = () => {
+    console.log('deleteRepuesto');
     db.transaction((tx) => {
       tx.executeSql(
-        'DELETE FROM vehiculos WHERE vechiulo = ?',
-        [userName],
+        'DELETE FROM users WHERE repuestoName = ?',
+        [repuestoName],
         (tx, results) => {
           console.log("results", results);
           if(results.rowsAffected > 0) {
-            Alert.alert("Vehiculo eliminado");
+            Alert.alert("Repuesto eliminado");
           }
           else{
-            Alert.alert("El vehiculo no existe");
+            Alert.alert("El repuesto no existe");
           }
           }
         }
@@ -30,15 +30,15 @@ const deleteVehiculo = () => {
   }
 }
 
-const DeleteVehiculo = () => {
+const DeleteRepuesto = () => {
   return (
  <SafeAreaView style={styles.container}>
   <View style={styles.generalView}>
     <View style={styles.generalView}>
       <MyInputText
-      placeholder="Nombre de Vehiculo"
-      onChangeText={(text) => setVehiculo(text)}/>
-      <MySingleButton title="Borrar Vehiculo" customPress={deleteVehiculo}/>
+      placeholder="Nombre de repuesto"
+      onChangeText={(text) => setRepuestoName(text)}/>
+      <MySingleButton title="Borrar repuesto" customPress={}/>
      
     </View>
   </View>
@@ -47,7 +47,7 @@ const DeleteVehiculo = () => {
   )
 }
 
-export default DeleteVehiculo
+export default DeleteRepuesto
 
 const styles = StyleSheet.create({
   container:{

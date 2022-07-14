@@ -7,26 +7,26 @@ import MySingleButton from '../components/MySingleButton'
 import DatabaseConnection from "../database/database-connection";
 const db = DatabaseConnection.getConnection();
 
-const getUserData = () => {
-  console.log('getUserData');
-  setUserData({})
+const getTratamientoData = () => {
+  console.log('getTratamientoData');
+  setTratamientoData({})
   db.transaction (tx=> {
     tx.executeSql(
-      'SELECT * FROM users WHERE userName = ?',
-      [userName], [tx, results] => {
+      'SELECT * FROM tratamientos WHERE tratamientoName = ?',
+      [tratamientoName], [tx, results] => {
         console.log('results', results);
       if(results.row.length >0){
-        setUserData(resuts.row.item(0));
+        setTratamientoData(resuts.row.item(0));
       }
       else{
-        Alert.alert('El usuario no existe');
+        Alert.alert('El tratamiento no existe');
       }
       }
    )
   )
 }
-const ViewUser = () => {
-  constn[userName, setUserName] = useState('');
+const ViewTratamiento = () => {
+  constn[tratamientoName, setTratamientoName] = useState('');
   const[userData, setUserData] = useState({});
   return (
     <SafeAreaView style={styles.container}>
@@ -34,14 +34,19 @@ const ViewUser = () => {
         <View style={styles.generalView}>
           <MyText style={styles.inputStyle}>Filtro de usuario</MyText>
           <MyInputText style={styles.inputStyle}
-          placeholder="Nomre de usuario"
-          onChangeText={(Text) => setUserName(Text)}
+          placeholder="Nomre del tratamiento"
+          onChangeText={(Text) => setTratamientoName(Text)}
           />
-          <MySingleButton title="Buscar" customPress={getUserData}/>
+          <MySingleButton title="Buscar" customPress={getTratamientoData}/>
           <View style={styles.presenterView}>
-            <MyText>Nombre de Usuario: {userData.userName} </MyText>
-            <MyText>email: {userData}</MyText>
-            <MyText>ViewUser</MyText>
+            <MyText>Nombre del tratamiento: {tratamientoData.tratamientoName} </MyText>
+            <MyText>auto: {tratamientoData}</MyText>
+            <MyText>Fecha Inicio: {tratamientoData}</MyText>
+            <MyText>Fecha Fin: {tratamientoData}</MyText>
+            <MyText>Costo: {tratamientoData}</MyText>
+            <MyText>Insumo: {tratamientoData}</MyText>
+            <MyText>Repuesto: {tratamientoData}</MyText>
+            <MyText>Ver tratamiento</MyText>
           </View>
         </View>
     </View>
@@ -49,7 +54,7 @@ const ViewUser = () => {
   )
 }
 
-export default ViewUser
+export default ViewTratamiento
 
 const styles = StyleSheet.create({
   container:{

@@ -5,6 +5,8 @@ import DatabaseConnection from "../database/database-connection";
 import Usuarios from Usuarios
 import Vehiculos from Vehiculos
 import Tratamientos from Tratamientos
+import Insumos from Insumos
+import Repuestos from Repuestos
 
 const db = DatabaseConnection.getConnection();
 
@@ -29,6 +31,16 @@ const HomeScreen = () => {
             btncolor="green"
             btnIcon="user-plus"
             customPress={() => {Tratamientos}} />
+              <MyButton
+            title="Insumos"
+            btncolor="green"
+            btnIcon="user-plus"
+            customPress={() => {Insumos}} />
+              <MyButton
+            title="Repuestos"
+            btncolor="green"
+            btnIcon="user-plus"
+            customPress={() => {Repuestos}} />
           </View>
         </View>
       </View>

@@ -10,35 +10,27 @@ import { ScrollView } from 'react-native-gesture-handler';
 import MyText from '../components/MyText';
 const db = DatabaseConnection.getConnection();
 
-const UpdateUser = () => {
-  const [user, setUser] = useState({});
+const UpdateRepuesto = () => {
+  const [repuesto, setRepuesto] = useState({});
 
-  const UpdateUser
-
-
+  const UpdateRepuesto
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.viewContainer}>
         <View style={styles.generalView}>
           <ScrollView keyboardShouldPersistTaps="handled"/>
             <KeyboardAvoidingView behavior='padding' style={styles.keyboardView}>
-              <MyText text="Buscar Usuario"/>
+              <MyText text="Buscar Repuesto"/>
               <MyInputText
-              placeholder="Ingrese el nombre de usuario"
+              placeholder="Ingrese el nombre del repuesto"
               style={styles.inputStyle}/>
               <MySingleButton title = "Buscar" customPress={} />
 
               <MyInputText 
-              placeholder="Ingrese el nombre de usuario"
+              placeholder="Ingrese el nombre del repuesto"
               value={user.userName}/>
               <MyInputText 
-              placeholder="Ingrese apellido"
-              value ={}/>
-               <MyInputText 
-              placeholder="Ingrese su cedula"
-              value ={}/>
-               <MyInputText 
-              placeholder="Ingrese matricula de su vehiculo"
+              placeholder="Ingrese cantidad"
               value ={}/>
               <MyButton title = "Actualizar" customPress={UpdateUser}/>
             </KeyboardAvoidingView>
@@ -49,7 +41,7 @@ const UpdateUser = () => {
   )
 }
 
-export default UpdateUser
+export default UpdateRepuesto
 
 const styles = StyleSheet.create({
   container: {

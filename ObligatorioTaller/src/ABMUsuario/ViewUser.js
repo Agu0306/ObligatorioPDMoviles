@@ -34,13 +34,15 @@ const ViewUser = () => {
         <View style={styles.generalView}>
           <MyText style={styles.inputStyle}>Filtro de usuario</MyText>
           <MyInputText style={styles.inputStyle}
-          placeholder="Nomre de usuario"
+          placeholder="Nombre de usuario"
           onChangeText={(Text) => setUserName(Text)}
           />
           <MySingleButton title="Buscar" customPress={getUserData}/>
           <View style={styles.presenterView}>
             <MyText>Nombre de Usuario: {userData.userName} </MyText>
-            <MyText>email: {userData}</MyText>
+            <MyText>Apellido: {userData}</MyText>
+            <MyText>Cedula: {userData}</MyText>
+            <MyText>Vehiculo: {userData}</MyText>
             <MyText>ViewUser</MyText>
           </View>
         </View>

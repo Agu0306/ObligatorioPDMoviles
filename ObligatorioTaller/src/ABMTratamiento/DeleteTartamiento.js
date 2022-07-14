@@ -6,22 +6,22 @@ import MySingleButton from '../components/MySingleButton';
 import DatabaseConnection from "../database/database-connection";
 const db = DatabaseConnection.getConnection();
 
-const deleteUser = () => {
-  const [userName, setUserName] useState('')
+const deleteTratamiento = () => {
+  const [tratamientoName, setTratamientoName] = useState('')
 
-  const deleteUser = () => {
-    console.log('deleteUser');
+  const deleteTratamiento = () => {
+    console.log('deleteTratamiento');
     db.transaction((tx) => {
       tx.executeSql(
-        'DELETE FROM users WHERE userName = ?',
-        [userName],
+        'DELETE FROM tratamiento WHERE tratamientoName = ?',
+        [tratamientoName],
         (tx, results) => {
           console.log("results", results);
           if(results.rowsAffected > 0) {
-            Alert.alert("Usuario eliminado");
+            Alert.alert("Tratamiento eliminado");
           }
           else{
-            Alert.alert("El usuario no existe");
+            Alert.alert("El tratamiento no existe");
           }
           }
         }
@@ -30,15 +30,15 @@ const deleteUser = () => {
   }
 }
 
-const DeleteUser = () => {
+const DeleteTratamiento = () => {
   return (
  <SafeAreaView style={styles.container}>
   <View style={styles.generalView}>
     <View style={styles.generalView}>
       <MyInputText
-      placeholder="Nombre de usuario"
-      onChangeText={(text) => setUserName(text)}/>
-      <MySingleButton title="Borrar Usuario" customPress={}/>
+      placeholder="Nombre de tratamiento"
+      onChangeText={(text) => setTratamientoName(text)}/>
+      <MySingleButton title="Borrar Tratamiento" customPress={}/>
      
     </View>
   </View>
@@ -47,7 +47,7 @@ const DeleteUser = () => {
   )
 }
 
-export default DeleteUser
+export default deleteTratamiento
 
 const styles = StyleSheet.create({
   container:{

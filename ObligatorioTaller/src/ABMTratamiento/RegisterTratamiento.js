@@ -7,38 +7,58 @@ import MySingleButton from '../components/MySingleButton';
 import DatabaseConnection from "../database/database-connection";
 const db = DatabaseConnection.getConnection();
 
-const RegisterUser = ({ navigation }) => {
-  let [userName, setUserName] = useState('');
-  let [password, setPassword] = useState('');
-  let [email, setEmail] = useState('');
+const RegisterTratamiento = ({ navigation }) => {
+  let [tratamiento, setTratamiento] = useState('');
+  let [auto, setAuto] = useState('');
+  let [inicio, setInicio] = useState('');
+  let [fin, setFin] = useState('');
+  let [costo, setCosto] = useState('');
+  let [insumo, setInsumo] = useState('');
+  let [repuesto, setRepuesto] = useState('');
 
-  const registerUser = () => {
-    console.log(userName, password, email);
+  const registerTratamiento = () => {
+    console.log(tratamiento, auto, inicio, fin, costo, insumo, repuesto);
     // validaciones estados
-    if(!userName) {
-      alert('Ingrese su nombre de usuario');
+    if(!tratamiento) {
+      alert('Ingrese nombre de tratamiento');
       return;
     }
 
-    if(!password) {
-      alert('Ingrese su contraseña');
+    if(!auto) {
+      alert('Ingrese vehiculo');
       return;
     }
 
-    if(!email) {
-      alert('Ingrese su email');
+    if(!inicio) {
+      alert('Ingrese fecha de inicio');
+      return;
+    }
+    if(!fin) {
+      alert('Ingrese fecha final');
+      return;
+    }
+    if(!costo) {
+      alert('Ingrese costo');
+      return;
+    }
+    if(!insumo) {
+      alert('Ingrese nombre del insumo');
+      return;
+    }
+    if(!repuesto) {
+      alert('Ingrese nombre del repuesto');
       return;
     }
 
     // guardar los datos
     db.transaction(tx => {
       tx.executeSql(
-        `INSERT INTO users (userName, password, email) VALUES (?, ?, ?)`,
-        [userName, password, email], (tx, results) => {
+        `INSERT INTO tratamientos (tratamiento, auto, inicio, fin, costo, insumo, repuesto) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        [tratamiento, auto, inicio, fin, costo, insumo, repuesto], (tx, results) => {
           console.log('results', results);
           // validar resultado
           if(results.rowsAffected > 0){
-            Alert.alert('Usuario registrado');
+            Alert.alert('Tratamiento registrado con exito!');
             navigation.navigate('HomeScreen');
           }
         }
@@ -53,24 +73,37 @@ const RegisterUser = ({ navigation }) => {
             <ScrollView>
               <KeyboardAvoidingView style={styles.keyboardView}>
                 <MyInputText
-                  placeholder="Nombre de Usuario"
-                  onchangeText={(text) => setUserName(text)}
+                  placeholder="Nombre de Tratamiento"
+                  onchangeText={(text) => setTratamiento(text)}
                 />
 
                 <MyInputText
-                  placeholder="Contraseña"
-                  minLength={8}
-                  maxLength={16}
-                  onchangeText={(text) => setPassword(text)}
+                  placeholder="Auto"
+                  onchangeText={(text) => setAuto(text)}
+                />
+                   <MyInputText
+                  placeholder="Fecha de inicio"
+                  onchangeText={(text) => setInicio(text)}
+                />
+                  <MyInputText
+                  placeholder="Fecha de finalizacion"
+                  onchangeText={(text) => setFin(text)}
+                />
+                  <MyInputText
+                  placeholder="Costo"
+                  onchangeText={(text) => setCosto(text)}
+                />
+                  <MyInputText
+                  placeholder="Insumo"
+                  onchangeText={(text) => setInsumo(text)}
+                />
+                  <MyInputText
+                  placeholder="Repuesto"
+                  onchangeText={(text) => setRepuesto(text)}
                 />
 
-                <MyInputText 
-                  placeholder="Correo Electronico"
-                  keyboardType="email-address"
-                  onchangeText={(text) => setEmail(text)}
-                />
 
-                <MySingleButton title="Guardar Usuario" onPress={registerUser}/>
+                <MySingleButton title="Guardar Tratamiento" onPress={registerTratamiento}/>
               </KeyboardAvoidingView>
             </ScrollView>
           </View>
@@ -79,7 +112,7 @@ const RegisterUser = ({ navigation }) => {
   )
 }
 
-export default RegisterUser
+export default RegisterTratamiento
 
 const styles = StyleSheet.create({
   container: {

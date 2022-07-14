@@ -6,21 +6,21 @@ import DatabaseConnection from "../database/database-connection";
 
 const db = DatabaseConnection.getConnection();
 
-const ViewAllTratamientos = () => {
-  const [tratamiento, setTratamiento] = useState([]);
+const ViewAllInsumos = () => {
+  const [insumos, setInsumos] = useState([]);
 
   useEffect(()=> {
     db.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM tratamiento',
+        'SELECT * FROM insumos',
         [],
         (tx, results) => {
           console.log("results", results);
           if (results.rows.length>0){
-            setTratamiento(results.rows);
+            setInsumos(results.rows);
           }
           else{
-            Alert.alert("No hay tratamientos");
+            Alert.alert("No hay insumos");
           }
         }
       )
@@ -32,8 +32,8 @@ const ViewAllTratamientos = () => {
       <View
       key={item.id}
       style={styles.listItemView}>
-        <MyText text="Nombre de Tratamiento"/>
-        <MyText text={item.userName}/>
+        <MyText text="Nombre de Insumo"/>
+        <MyText text={item.insumoName}/>
         <MyText/>
         <MyText/>
       </View>
@@ -45,7 +45,7 @@ const ViewAllTratamientos = () => {
         <View>
           <FlatList
           contentContainerStyle={{paddingHorizontal:20}}/>
-          data={users}
+          data={insumos}
           keyExtractor={(item, index)=> index.toString()}
           renderItem={({item})=> listItemView(item)}
         </View>
@@ -55,7 +55,7 @@ const ViewAllTratamientos = () => {
   )
 }
 
-export default ViewAllTratamientos
+export default ViewAllInsumos
 
 const styles = StyleSheet.create({
   container: {

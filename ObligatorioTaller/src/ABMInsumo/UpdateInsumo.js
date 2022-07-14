@@ -10,37 +10,29 @@ import { ScrollView } from 'react-native-gesture-handler';
 import MyText from '../components/MyText';
 const db = DatabaseConnection.getConnection();
 
-const UpdateUser = () => {
-  const [user, setUser] = useState({});
+const UpdateInsumo = () => {
+  const [Insumo, setInsumo] = useState({});
 
-  const UpdateUser
-
-
+  const UpdateInsumo
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.viewContainer}>
         <View style={styles.generalView}>
           <ScrollView keyboardShouldPersistTaps="handled"/>
             <KeyboardAvoidingView behavior='padding' style={styles.keyboardView}>
-              <MyText text="Buscar Usuario"/>
+              <MyText text="Buscar Insumo"/>
               <MyInputText
-              placeholder="Ingrese el nombre de usuario"
+              placeholder="Ingrese el nombre del insumo"
               style={styles.inputStyle}/>
               <MySingleButton title = "Buscar" customPress={} />
 
               <MyInputText 
-              placeholder="Ingrese el nombre de usuario"
+              placeholder="Ingrese el nombre del insumo"
               value={user.userName}/>
               <MyInputText 
-              placeholder="Ingrese apellido"
+              placeholder="Ingrese cantidad"
               value ={}/>
-               <MyInputText 
-              placeholder="Ingrese su cedula"
-              value ={}/>
-               <MyInputText 
-              placeholder="Ingrese matricula de su vehiculo"
-              value ={}/>
-              <MyButton title = "Actualizar" customPress={UpdateUser}/>
+              <MyButton title = "Actualizar" customPress={UpdateInsumo}/>
             </KeyboardAvoidingView>
         </View>
       </View>
@@ -49,7 +41,7 @@ const UpdateUser = () => {
   )
 }
 
-export default UpdateUser
+export default UpdateInsumo
 
 const styles = StyleSheet.create({
   container: {

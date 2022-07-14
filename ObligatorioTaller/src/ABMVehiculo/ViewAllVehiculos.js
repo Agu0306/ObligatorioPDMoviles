@@ -6,21 +6,21 @@ import DatabaseConnection from "../database/database-connection";
 
 const db = DatabaseConnection.getConnection();
 
-const ViewAllUsers = () => {
-  const [users, setUsers] = useState([]);
+const ViewAllVehiculos = () => {
+  const [vehiculo, setVehiculo] = useState([]);
 
   useEffect(()=> {
     db.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM users',
+        'SELECT * FROM vehiculo',
         [],
         (tx, results) => {
           console.log("results", results);
           if (results.rows.length>0){
-            setUsers(results.rows);
+            setVehiculo(results.rows);
           }
           else{
-            Alert.alert("No hay usuarios");
+            Alert.alert("No hay vehiculos");
           }
         }
       )
@@ -32,7 +32,7 @@ const ViewAllUsers = () => {
       <View
       key={item.id}
       style={styles.listItemView}>
-        <MyText text="Nombre de Usuario"/>
+        <MyText text="Matricula"/>
         <MyText text={item.userName}/>
         <MyText/>
         <MyText/>
@@ -45,7 +45,7 @@ const ViewAllUsers = () => {
         <View>
           <FlatList
           contentContainerStyle={{paddingHorizontal:20}}/>
-          data={users}
+          data={vehiculo}
           keyExtractor={(item, index)=> index.toString()}
           renderItem={({item})=> listItemView(item)}
         </View>
@@ -55,7 +55,7 @@ const ViewAllUsers = () => {
   )
 }
 
-export default ViewAllUsers
+export default ViewAllVehiculos
 
 const styles = StyleSheet.create({
   container: {
